@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
+using Improwin.Website.Models;
 
 namespace Improwin.Website.Controllers
 {
@@ -20,11 +22,17 @@ namespace Improwin.Website.Controllers
             return View();
         }
 
+        
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            if (Request.HttpMethod == "POST")
+            { ViewBag.Message = "post";  }
+            else
+            { ViewBag.Message = "Hit http get"; }
 
             return View();
+
         }
-    }
+
+        }
 }

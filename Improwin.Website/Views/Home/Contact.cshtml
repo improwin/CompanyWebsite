@@ -40,55 +40,17 @@
         <div class="center">
             <h2>Drop Your Message</h2>
             <p class="lead">To learn more about whether our services are right for your business need, please complete the form below.</p>
-
         </div>
         <!--Start-->
-    <div>
-            @using (Html.BeginForm("Contact","Home"))
+    <div>@if (Request.HttpMethod == "GET")
             {
-            <div class="row contact-wrap">
-            <div class="status alert alert-success" style="display: none"></div>
-
-            <div class="col-sm-5 col-sm-offset-1">
-                <div class="form-group">
-                    <label>Name *</label>  
-                    <input type="text" class="form-control" id="name" name="name" required="required" />             
-                </div>
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" class="form-control" id="email" name="email" required="required" />
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" class="form-control" id="ph" name="ph" />
-                </div>
-                <div class="form-group">
-                    <label>Company Name</label>
-                    <input type="text" class="form-control" id="company" name="company" />                    
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Submit Message" />
-                </div>
-            </div>
-            <div class="col-sm-5">
-                <div class="form-group">
-                    <label>Subject *</label>
-                    <input type="text" class="form-control" id="subject" name="subject" required="required" />
-
-                </div>
-                <div class="form-group">
-                    <label>Message *</label>
-                    <textarea class="form-control" id="msg" name="msg" required="required" rows="8"></textarea>
-                    
-                </div>
-                
-            </div>
-
-        </div><!--/.row-->
-        <!--End-->
-
+                @Html.Partial("~/Views/_ContactForm.cshtml")
             }
-
+         @if (Request.HttpMethod == "POST")
+         {
+                @Html.Partial("~/Views/ContactFormPost.cshtml");
+                <p>@ViewBag.Message</p>
+            }
     </div><!--/.container-->
 
            
