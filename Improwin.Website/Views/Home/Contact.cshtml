@@ -2,7 +2,52 @@
     ViewBag.Title = "Contact";
 }
 
-<div id="headerContent"></div>
+<div id="headerContent">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#contactForm").submit(function (e) {
+                
+                var jsonObject = {
+                    "name": $("#name").val(),
+                    "email": $("#email").val(),
+                    "ph": $("#ph").val(),
+                    "company": $("#company").val(),
+                    "subject": $("#subject").val(),
+                    "msg": $("#msg").val(),
+
+                                 };
+                //var tmp = $("#contactForm").serializeArray();
+                //console.log(tmp);
+                //tmp = JSON.stringify(tmp);
+                //console.log(tmp);
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Contact")",
+                    contentType: "application/json ; charset=utf-8",
+                    data: JSON.stringify(jsonObject),
+                    dataType: "json",
+                    success: function (response) {
+                        //debugger;
+                        $("#contactForm").hide();
+                        $("#sendstatus").text('Your message has been sent successfully');
+                        $("#sendstatus").show();
+                        console.log(tmp);
+                    },
+                    error: function (response) {
+                        console.log("Failure");
+                        $("#contactForm").hide();
+                        $("#sendstatus").text('We apollogize for a technical issue which prevented mail send.');
+                        $("#sendstatus").show();
+                    }
+                });
+
+                e.preventDefault();
+            })           
+        })
+
+    </script>
+</div>
 
 <section id="contact-info">
     <div class="center">
@@ -42,15 +87,53 @@
             <p class="lead">To learn more about whether our services are right for your business need, please complete the form below.</p>
         </div>
         <!--Start-->
-    <div>@if (Request.HttpMethod == "GET")
-            {
-                @Html.Partial("~/Views/_ContactForm.cshtml")
-            }
-         @if (Request.HttpMethod == "POST")
-         {
-                @Html.Partial("~/Views/ContactFormPost.cshtml");
-                <p>@ViewBag.Message</p>
-            }
+    <div>
+        <div id="sendstatus" class="status alert alert-success" style="display: none"></div>
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "contactForm" }))
+        {
+            <div class="row contact-wrap">
+                <div class="status alert alert-success" style="display: none"></div>
+
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" class="form-control" id="email" name="email" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" class="form-control" id="ph" name="ph" />
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" id="company" name="company" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Submit Message" />
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>Subject *</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required="required" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea class="form-control" id="msg" name="msg" required="required" rows="8"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div><!--/.row-->
+        <!--End-->
+
+        }
     </div><!--/.container-->
 
            

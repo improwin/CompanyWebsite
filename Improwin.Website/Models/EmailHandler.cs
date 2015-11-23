@@ -24,6 +24,8 @@ namespace Improwin.Website.Models
             _displayName = displayName;
         }
 
+        public EmailHandler() { }
+
         public bool Send()
         {
             MailMessage _objMsg = new MailMessage();
