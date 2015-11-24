@@ -5,45 +5,48 @@
 <div id="headerContent">
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#contactForm").submit(function (e) {
+            
+            
                 
-                var jsonObject = {
-                    "name": $("#name").val(),
-                    "email": $("#email").val(),
-                    "ph": $("#ph").val(),
-                    "company": $("#company").val(),
-                    "subject": $("#subject").val(),
-                    "msg": $("#msg").val(),
+                        
 
-                                 };
-                //var tmp = $("#contactForm").serializeArray();
-                //console.log(tmp);
-                //tmp = JSON.stringify(tmp);
-                //console.log(tmp);
+            $("#contactForm").submit(function (e) {
 
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("Contact")",
-                    contentType: "application/json ; charset=utf-8",
-                    data: JSON.stringify(jsonObject),
+                    //contentType: "application/json ; charset=utf-8",
+                    data: $("#contactForm").serialize(),
                     dataType: "json",
                     success: function (response) {
-                        //debugger;
-                        $("#contactForm").hide();
-                        $("#sendstatus").text('Your message has been sent successfully');
-                        $("#sendstatus").show();
-                        console.log(tmp);
-                    },
-                    error: function (response) {
-                        console.log("Failure");
-                        $("#contactForm").hide();
-                        $("#sendstatus").text('We apollogize for a technical issue which prevented mail send.');
-                        $("#sendstatus").show();
-                    }
-                });
+                        console.log("inside function");
+                        if (response.msg == 'success') {
+                            //debugger;
+                            //console.log("inside if");
+                            $("#contactForm").hide();
+                            $("#sendstatus").text('Your message has been sent successfully');
+                            $("#sendstatus").show('slow');
+                        }
 
-                e.preventDefault();
-            })           
+        else {
+            //console.log("inside else");
+                            $("#contactForm").hide();
+            $("#sendstatus").attr('class','status alert alert-danger');
+            $("#sendstatus").text('We apollogize for a technical issue which prevented mail send.');
+            $("#sendstatus").show('slow');
+        }
+        },
+        error: function (response) {
+            //console.log("Failure");
+            $("#contactForm").hide();
+            $("#sendstatus").class("status alert alert-danger");
+            $("#sendstatus").text('We apollogize for a technical issue on communication with server');
+            $("#sendstatus").show();
+        }
+        });
+
+        e.preventDefault();
+        })
         })
 
     </script>
@@ -88,7 +91,7 @@
         </div>
         <!--Start-->
     <div>
-        <div id="sendstatus" class="status alert alert-success" style="display: none"></div>
+        <div id="sendstatus" class="status alert alert-success" style="display: none; text-align: center; font-size:large"></div>
 
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "contactForm" }))
         {

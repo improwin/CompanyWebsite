@@ -19,14 +19,27 @@
 
     <script>
         $(document).ready(function (e) {
+
+            var a = '@Request.Url.PathAndQuery.Split('/').Last().ToLower()';
+            console.log(a);
+            if (a == '' || a == 'index') {
+                $('#index').attr("class", "active");
+            }
+            else {
+                $('#' + a).attr("class", "active");
+            }
+
             $("ul li a").click(function () {
                 //alert("Hi");
                 //this.attr("class", "active");
-                console.log($(this).parent());
+
+
+                //console.log($(this).parent());
                 $("ul li").removeAttr("class");
                 $(this).parent().attr("class", "active");
-            })
+            })            
         })
+        
     </script>
 
 </head>
@@ -72,10 +85,11 @@
 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="indexLink" class="active"><a>Home</a></li>
-                        <li id="aboutLink">@Html.ActionLink("About Us", "About")</li>
-                        <li id="ServiceLink"><a href="#services">Services</a></li>
-                        <li id="portLink"><a href="#recent-works">Portfolio</a></li>
+                        <li id="index">@Html.ActionLink("Home", "Index")</li>
+                        <li id="about">@Html.ActionLink("About Us", "About")</li>
+                        <!--<li id="Service"><a href="#services">Services</a></li> -->
+                        <li id="Service">@Html.ActionLink("Services", "Index")</li>
+                        <li id="portfolio"><a href="#recent-works">Portfolio</a></li>
                         <!--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -86,7 +100,7 @@
                             </ul>
                         </li>
                         <li><a href="blog.html">Blog</a></li>-->
-                        <li>@Html.ActionLink("Contact Us", "Contact")</li>
+                        <li id="contact">@Html.ActionLink("Contact Us", "Contact")</li>
                     </ul>
                 </div>
             </div>
