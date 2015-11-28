@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
+
 namespace Improwin.Website.Models
 {
     public class Helper
@@ -14,4 +16,5 @@ namespace Improwin.Website.Models
         public string subject { get; set; }
         public string msg { get; set; }
     }
+   
 }

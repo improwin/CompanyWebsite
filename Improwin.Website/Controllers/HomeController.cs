@@ -80,12 +80,6 @@ namespace Improwin.Website.Controllers
 
 
                     //Main Table End
-
-
-
-
-                    
-
                 
             }
             else
