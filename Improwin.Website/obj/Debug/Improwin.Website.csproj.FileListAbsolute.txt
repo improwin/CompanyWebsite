@@ -66,4 +66,3 @@ C:\Users\Joe\documents\visual studio 2015\Projects\Improwin\Improwin.Website\bin
 C:\Users\Joe\documents\visual studio 2015\Projects\Improwin\Improwin.Website\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Joe\documents\visual studio 2015\Projects\Improwin\Improwin.Website\obj\Debug\Improwin.Website.dll
 C:\Users\Joe\documents\visual studio 2015\Projects\Improwin\Improwin.Website\obj\Debug\Improwin.Website.pdb
-C:\Users\Joe\documents\visual studio 2015\Projects\Improwin\Improwin.Website\obj\Debug\Improwin.Website.csprojResolveAssemblyReference.cache
